@@ -1,0 +1,22 @@
+{
+  "name": "ethereum-oracle",
+  "version": "1.0.0",
+  "description": "Oracle for Ethereum network",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "author": "Krzysztof Wędrowicz",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "solidity-coverage": "^0.4.11",
+    "solium": "^1.1.5"
+  }
+}
