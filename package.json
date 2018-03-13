@@ -10,7 +10,9 @@
     "test": "truffle test",
     "solium": "solium -d contracts/",
     "coverage": "solidity-coverage",
-    "lint": "solium --dir contracts && eslint migrations/ test/"
+    "lint": "solium --dir contracts && eslint migrations/ test/",
+    "server1": "node backend/app.js 0x387fd56b827b0766a55054eee6f642532152245dae327af39710d011dfe498c1",
+    "server2": "node backend/app.js 0xcf38bef807bc5ac3dace4580141af59fcd9ce86e9f6f5335cee58b9f02469f7d"
   },
   "author": "Krzysztof Wędrowicz",
   "license": "ISC",
@@ -24,7 +26,11 @@
     "solium": "^1.1.5"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.5",
     "truffle": "^4.1.3",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "^1.0.0-beta.30",
     "zeppelin-solidity": "1.7.0"
   }
 }
