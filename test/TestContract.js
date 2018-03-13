@@ -5,7 +5,7 @@ require('chai').should();
 
 const TestContract = artifacts.require('TestContract');
 
-contract('TestContract', (accounts) => {
+contract('UsingOracleContract', (accounts) => {
   const oracleAddress = accounts[1];
 
   beforeEach(async () => {

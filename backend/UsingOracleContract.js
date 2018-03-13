@@ -1,4 +1,4 @@
-class TestContract {
+class UsingOracleContract {
   constructor(web3, abi, address) {
     this.contract = new web3.eth.Contract(abi, address, { from: web3.eth.defaultAccount });
   }
@@ -8,4 +8,4 @@ class TestContract {
   }
 }
 
-module.exports = TestContract;
+module.exports = UsingOracleContract;

@@ -14,6 +14,7 @@ const UsingOracle = artifacts.require('UsingOracle');
 contract('UsingOracle', (accounts) => {
   const oracleAddress = accounts[1];
   const otherAdddress = accounts[2];
+  const nextOracle = accounts[3];
 
   beforeEach(async () => {
     this.usingOracle = await UsingOracle.new(oracleAddress);
@@ -73,5 +74,14 @@ contract('UsingOracle', (accounts) => {
 
     // then
     await callbackTransaction.should.be.rejectedWith(EVMRevert);
+  });
+
+  it('should allow to change oracle', async () => {
+    // when
+    await this.usingOracle.setOracleAddress(nextOracle);
+
+    // then
+    const currentOracleAddress = await this.usingOracle.oracleAddress();
+    currentOracleAddress.should.equal(nextOracle);
   });
 });
