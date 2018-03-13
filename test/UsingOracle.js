@@ -2,12 +2,21 @@
 /* eslint no-underscore-dangle: 0 */
 
 const { inTransaction } = require('./utils/expectEvent');
+require('chai')
+  .use(require('chai-as-promised'))
+  .should();
+
+const EVMThrow = message => `VM Exception while processing transaction: ${message}`;
+const EVMRevert = EVMThrow('revert');
 
 const UsingOracle = artifacts.require('UsingOracle');
 
-contract('UsingOracle', () => {
+contract('UsingOracle', (accounts) => {
+  const oracleAddress = accounts[1];
+  const otherAdddress = accounts[2];
+
   beforeEach(async () => {
-    this.usingOracle = await UsingOracle.new();
+    this.usingOracle = await UsingOracle.new(oracleAddress);
   });
 
   it('should emit a Query event', async () => {
@@ -23,9 +32,20 @@ contract('UsingOracle', () => {
     await this.usingOracle.query('json(http://api.fixer.io/latest?symbols=USD,GBP).rates.GBP');
 
     // when
-    const transaction = this.usingOracle.__callback('1.23');
+    const transaction = this.usingOracle.__callback('1.23', { from: oracleAddress });
 
     // then
     await inTransaction(transaction, 'Result');
+  });
+
+  it('should reject callback from addresses other than oracle', async () => {
+    // given
+    await this.usingOracle.query('json(http://api.fixer.io/latest?symbols=USD,GBP).rates.GBP');
+
+    // when
+    const transaction = this.usingOracle.__callback('1.23', { from: otherAdddress });
+
+    // then
+    await transaction.should.be.rejectedWith(EVMRevert);
   });
 });

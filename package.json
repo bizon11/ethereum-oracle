@@ -7,16 +7,24 @@
     "test": "test"
   },
   "scripts": {
-    "test": "truffle test"
+    "test": "truffle test",
+    "solium": "solium -d contracts/",
+    "coverage": "solidity-coverage",
+    "lint": "solium --dir contracts && eslint migrations/ test/"
   },
   "author": "Krzysztof Wędrowicz",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.9.0",
     "solidity-coverage": "^0.4.11",
     "solium": "^1.1.5"
+  },
+  "dependencies": {
+    "truffle": "^4.1.3",
+    "zeppelin-solidity": "1.7.0"
   }
 }
