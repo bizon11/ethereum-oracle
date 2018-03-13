@@ -18,8 +18,9 @@ contract('TestContract', (accounts) => {
     await resultBefore.should.not.equal('1.23');
 
     // when
-    await this.testContract.checkNew();
-    await this.testContract.__callback('1.23', { from: oracleAddress });
+    const queryTransaction = await this.testContract.checkNew();
+    const { queryId } = queryTransaction.logs[0].args;
+    await this.testContract.__callback(queryId, '1.23', { from: oracleAddress });
 
     // then
     const resultAfter = await this.testContract.result();

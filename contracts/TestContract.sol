@@ -12,8 +12,8 @@ contract TestContract is UsingOracle {
         query("json(http://api.fixer.io/latest?symbols=USD,GBP).rates.GBP");
     }
 
-    function __callback(string _result) public onlyOracle {
+    function __callback(bytes32 _queryId, string _result) public {
+        super.__callback(_queryId, _result);
         result = _result;
-        super.__callback(_result);
     }
 }
